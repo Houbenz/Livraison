@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <form action="http://localhost:8000/api/createUser" method="POST">
+    <form action="http://localhost:8000/api/createClient" method="POST">
 
         <Label>Firstname</Label><br/>
         <input type="text" name="firstname" id="firstname"><br/>
@@ -18,10 +18,10 @@
 
         <Label>Email</Label><br/>
         <input type="email" name="email" id="email"><br/>
-
+<!--
         <Label>Type</Label><br/>
         <input type="text" name="type" id="type"><br/>
-
+-->
         <Label>password</Label><br/>
         <input type="password" name="password" id="password"><br/><br/>
 

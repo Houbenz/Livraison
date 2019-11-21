@@ -20,3 +20,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('createUser', 'UserController@store');
 
 Route::get('getUsers','UserController@getUsers');
+
+Route::post('createClient', 'ClientController@testLivraison');
+
+Route::resources([
+    'clients' => 'ClientController',
+    'drivers' => 'DriverController',
+    'vehicules' => 'VehiculeController',
+    'produits' => 'ProduitController',
+    'locations' => 'LocationController'
+]);
