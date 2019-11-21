@@ -4,8 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Client extends Model
+class Client extends User
 {
+
+
+    protected $table='users';
 
     public function drivers(){
         return $this->belongsToMany('App\Driver','livraisons','client_id','driver_id')->withPivot('prix');

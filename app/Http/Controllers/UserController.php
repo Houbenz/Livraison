@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Client;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use App\Location;
 
 class UserController extends Controller
 {
@@ -15,26 +18,68 @@ class UserController extends Controller
         return $users;
     }
 
+    public function registerPage(){
+        return view('test');
+    }
 
 
-    public function store(Request $request){
-
+  /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'firstname'=> 'required','string','max:255',
+            'lastname' => 'required','string','max:255',
+            'email' => 'required','string','max:255','unique:clients',
+            'password'=> 'required','min:6','confirmed',
+            'wilaya'=>'required','string','max:30',
+        ]);
 
         $input = $request->input();
 
-        User::create([
-            'firstname' => $input['firstname'],
-            'lastname' => $input['lastname'],
-            'email' => $input['email'],
-            'type' => $input['type'],
-            'password' => Hash::make($input['password']),
-        ]);
 
-        $user= DB::table('users')->where('firstname','hocine')->first();
+            $user= new Client;
+            $user->firstname = $input['firstname'];
+            $user->lastname = $input['lastname'];
+            $user->email = $input['email'];
+            $user->password =Hash::make($input['password']);
 
-        if($user != null)
-            return "added ";
-        else
-            return "no one is added";
+
+        $location=Location::where('wilaya',$input['wilaya'])->first();
+
+        $user->location()->associate($location);
+
+        $user->type="Client";
+        $user->save();
+
+        $user1=Client::where('firstname',$input['firstname'])->first();
+
+        return response()->json('user created !'.$user1->lastname.'  '.$user1->location->wilaya);
     }
+
+
+    /**
+     * return the view of login page
+     */
+    public function loginPage(){
+        return view('auth.login');
+    }
+    /**
+     *
+     * used for logging
+     *
+     */
+    public function login(Request $request){
+        $credentials = $request->only('email','password');
+
+        if(Auth::attempt($credentials))
+            return 'logged in';
+        else
+            return redirect('/api/login');
+    }
+
 }

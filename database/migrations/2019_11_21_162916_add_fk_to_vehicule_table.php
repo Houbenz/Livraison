@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddFkToClientTable extends Migration
+class AddFkToVehiculeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddFkToClientTable extends Migration
      */
     public function up()
     {
-        Schema::table('clients', function (Blueprint $table) {
-            $table->bigInteger('location_id');
+        Schema::table('vehicules', function (Blueprint $table) {
+            $table->bigInteger('driver_id');
         });
     }
 
@@ -25,7 +25,7 @@ class AddFkToClientTable extends Migration
      */
     public function down()
     {
-        Schema::table('client', function (Blueprint $table) {
+        Schema::table('vehicule', function (Blueprint $table) {
             //
         });
     }

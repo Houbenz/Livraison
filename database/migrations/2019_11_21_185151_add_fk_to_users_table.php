@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddFkToDriverTable extends Migration
+class AddFkToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,8 @@ class AddFkToDriverTable extends Migration
      */
     public function up()
     {
-        Schema::table('drivers', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
+
             $table->bigInteger('location_id');
         });
     }
@@ -25,7 +26,7 @@ class AddFkToDriverTable extends Migration
      */
     public function down()
     {
-        Schema::table('driver', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             //
         });
     }

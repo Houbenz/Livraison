@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <form action="http://localhost:8000/api/drivers" method="POST">
+    <form action="http://localhost:8000/api/register" method="POST">
 
         <Label>Firstname</Label><br/>
         <input type="text" name="firstname" id="firstname"><br/>

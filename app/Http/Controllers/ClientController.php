@@ -21,13 +21,21 @@ class ClientController extends Controller
     }
 
     /**
+     * For login Client users
+     */
+
+     public function login(){
+
+     }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+
     }
 
     /**

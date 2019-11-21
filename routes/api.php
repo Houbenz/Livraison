@@ -23,9 +23,13 @@ Route::get('getUsers','UserController@getUsers');
 
 Route::post('createClient', 'ClientController@testLivraison');
 
+Route::get('login','UserController@loginPage');
+Route::post('login','UserController@login');
+Route::get('register','UserController@registerPage');
+Route::post('register','UserController@store');
+
 Route::resources([
-    'clients' => 'ClientController',
-    'drivers' => 'DriverController',
+    'users' => 'UserController',
     'vehicules' => 'VehiculeController',
     'produits' => 'ProduitController',
     'locations' => 'LocationController'
