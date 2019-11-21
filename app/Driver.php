@@ -14,7 +14,11 @@ class Driver extends Model
     }
 
     public function location(){
-        return $this->belongsTo('App\Location');
+        return $this->belongsTo('App\Location','location_id');
     }
+
+    protected $fillable=[
+        'firstname','lastname','email','password',
+    ];
 
 }

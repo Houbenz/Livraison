@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Client;
 use App\Driver;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+
 
 class ClientController extends Controller
 {
@@ -36,7 +38,25 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'firstname'=> 'required','string','max:255',
+            'lastname' => 'required','string','max:255',
+            'email' => 'required','string','max:255','unique:clients',
+            'password'=> 'required','min:6','confirmed',
+        ]);
+
+
+        $input = $request->input();
+
+        Client::create([
+            'firstname' => $input['firstname'],
+            'lastname' => $input['lastname'],
+            'email' => $input['email'],
+            'password' => Hash::make($input['password']),
+        ]);
+
+        return response()->json("Client created !");
     }
 
     /**

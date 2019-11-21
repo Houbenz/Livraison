@@ -14,4 +14,9 @@ class Location extends Model
     public function drivers(){
         return $this->hasMany('App\Driver');
     }
+
+
+    protected $fillable=[
+        'wilaya','zipcode','ville','address',
+    ];
 }

@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <form action="http://localhost:8000/api/createClient" method="POST">
+    <form action="http://localhost:8000/api/drivers" method="POST">
 
         <Label>Firstname</Label><br/>
         <input type="text" name="firstname" id="firstname"><br/>
@@ -22,10 +22,17 @@
         <Label>Type</Label><br/>
         <input type="text" name="type" id="type"><br/>
 -->
-        <Label>password</Label><br/>
-        <input type="password" name="password" id="password"><br/><br/>
 
-        <input type="submit" value="Submit fomr">
+        <Label>Wilaya</Label><br/>
+        <input type="text" name="wilaya" id="wilaya"><br/>
+
+        <Label>password</Label><br/>
+        <input type="password" name="password" id="password"><br/>
+
+        <Label>confirm password</Label><br/>
+        <input type="password" name="password_confirmation" id="password"><br/><br/>
+
+        <input type="submit" value="Submit form">
 
     </form>
 

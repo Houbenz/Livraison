@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Driver;
+use App\Location;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class DriverController extends Controller
 {
@@ -35,7 +37,34 @@ class DriverController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'firstname'=> 'required','string','max:255',
+            'lastname' => 'required','string','max:255',
+            'email' => 'required','string','max:255','unique:clients',
+            'password'=> 'required','min:6','confirmed',
+            'wilaya'=>'required','string','max:30',
+        ]);
+
+        $input = $request->input();
+
+
+            $driver= new Driver;
+            $driver->firstname = $input['firstname'];
+            $driver->lastname = $input['lastname'];
+            $driver->email = $input['email'];
+            $driver->password =Hash::make($input['password']);
+
+
+        $location=Location::where('wilaya',$input['wilaya'])->first();
+
+        $driver->location()->associate($location);
+
+
+        $driver->save();
+
+        $driver1=Driver::where('firstname',$input['firstname'])->first();
+
+        return response()->json('Driver created !'.$driver1->lastname.'  '.$driver1->location->wilaya);
     }
 
     /**
